@@ -21,13 +21,27 @@ public sealed class SpaceXController : ControllerBase
     }
 
     [HttpGet("Launches/Past")]
-    public async Task<IActionResult> GetPastLaunchesAsync([FromQuery] int pageNumber)
+    public async Task<IActionResult> GetPastLaunchesAsync(
+        [FromQuery] int pageNumber)
     {
         _logger.LogInformation("Getting SpaceX past launches for page {PageNumber}", pageNumber);
 
         var query = new LaunchQuery(pageNumber);
 
         var result = await _spaceXApiClient.GetPastLaunchesAsync(query);
+
+        return result.ToOk();
+    }
+
+    [HttpGet("Launches/Upcoming")]
+    public async Task<IActionResult> GetUpcomingLaunchesAsync(
+        [FromQuery] int pageNumber)
+    {
+        _logger.LogInformation("Getting SpaceX upcoming launches for page {PageNumber}", pageNumber);
+
+        var query = new LaunchQuery(pageNumber);
+
+        var result = await _spaceXApiClient.GetUpcomingLaunchesAsync(query);
 
         return result.ToOk();
     }
