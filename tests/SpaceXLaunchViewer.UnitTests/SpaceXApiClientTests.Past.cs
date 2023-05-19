@@ -9,7 +9,7 @@ using SpaceXLaunchViewer.Core.ResponseModels;
 using SpaceXLaunchViewer.Infrastructure.Services;
 
 namespace SpaceXLaunchViewer.UnitTests;
-public class SpaceXApiClientTests
+public partial class SpaceXApiClientTests
 {
     private readonly MockHttpMessageHandler _httpMockMessageHandler;
     private readonly Mock<IHttpClientFactory> _httpClientFactoryMock;
