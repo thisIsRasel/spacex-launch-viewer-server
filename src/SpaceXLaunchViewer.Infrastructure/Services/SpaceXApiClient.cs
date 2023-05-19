@@ -56,4 +56,31 @@ public sealed class SpaceXApiClient : ISpaceXApiClient
 
         return new Result<IEnumerable<Launch>?>(records);
     }
+
+    public async Task<Result<IEnumerable<Launch>?>> GetUpcomingLaunchesAsync(
+        LaunchQuery query)
+    {
+        var validationResult = await _launchQueryValidator.ValidateAsync(query);
+        if (validationResult.IsValid is false)
+        {
+            return new Result<IEnumerable<Launch>?>(
+                new ValidationException(validationResult.Errors));
+        }
+
+        using var httpClient = _httpClientFactory.CreateClient(SpaceXOptions.SpaceX);
+
+        int offset = (query.PageNumber - 1) * RecordsPerRequestLimit;
+
+        var response = await RetryPolicy
+            .ExecuteAsync(() => httpClient.GetAsync($"launches/upcoming?offset={offset}&limit={RecordsPerRequestLimit}"));
+
+        var records = Enumerable.Empty<Launch>();
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            records = JsonConvert.DeserializeObject<IEnumerable<Launch>?>(content);
+        }
+
+        return new Result<IEnumerable<Launch>?>(records);
+    }
 }
