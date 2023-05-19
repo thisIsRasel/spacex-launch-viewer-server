@@ -24,7 +24,9 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddSettings(configuration);
 
-builder.Services.AddHttpClients();
+builder.Services
+    .AddHttpClients()
+    .AddValidators();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
