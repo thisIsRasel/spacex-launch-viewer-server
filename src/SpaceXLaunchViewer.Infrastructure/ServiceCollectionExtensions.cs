@@ -43,6 +43,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services)
     {
         services.AddScoped<IValidator<LaunchQuery>, LaunchQueryValidator>();
+        services.AddScoped<IValidator<LaunchDetailQuery>, LaunchDetailQueryValidator>();
 
         return services;
     }
