@@ -49,7 +49,8 @@ public partial class SpaceXApiClientTests
 
         var spaceXLaunchService = new SpaceXApiClient(
             _httpClientFactoryMock.Object,
-            _launchQueryValidatorMock.Object);
+            _launchQueryValidatorMock.Object,
+            _launchDetailQueryValidatorMock.Object);
 
         // Act
         var result = await spaceXLaunchService.GetUpcomingLaunchesAsync(query);
@@ -94,7 +95,8 @@ public partial class SpaceXApiClientTests
 
         var spaceXLaunchService = new SpaceXApiClient(
             _httpClientFactoryMock.Object,
-            _launchQueryValidatorMock.Object);
+            _launchQueryValidatorMock.Object,
+            _launchDetailQueryValidatorMock.Object);
 
         // Act
         var result = await spaceXLaunchService.GetUpcomingLaunchesAsync(query);

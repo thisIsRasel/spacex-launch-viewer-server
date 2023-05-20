@@ -14,12 +14,14 @@ public partial class SpaceXApiClientTests
     private readonly MockHttpMessageHandler _httpMockMessageHandler;
     private readonly Mock<IHttpClientFactory> _httpClientFactoryMock;
     private readonly Mock<IValidator<LaunchQuery>> _launchQueryValidatorMock;
+    private readonly Mock<IValidator<LaunchDetailQuery>> _launchDetailQueryValidatorMock;
 
     public SpaceXApiClientTests()
     {
         _httpMockMessageHandler = new MockHttpMessageHandler();
         _httpClientFactoryMock = new Mock<IHttpClientFactory>();
         _launchQueryValidatorMock = new Mock<IValidator<LaunchQuery>>();
+        _launchDetailQueryValidatorMock = new Mock<IValidator<LaunchDetailQuery>>();
     }
 
     [Fact]
@@ -60,7 +62,8 @@ public partial class SpaceXApiClientTests
 
         var spaceXLaunchService = new SpaceXApiClient(
             _httpClientFactoryMock.Object,
-            _launchQueryValidatorMock.Object);
+            _launchQueryValidatorMock.Object,
+            _launchDetailQueryValidatorMock.Object);
 
         // Act
         var result = await spaceXLaunchService.GetPastLaunchesAsync(query);
@@ -108,7 +111,8 @@ public partial class SpaceXApiClientTests
 
         var spaceXLaunchService = new SpaceXApiClient(
             _httpClientFactoryMock.Object,
-            _launchQueryValidatorMock.Object);
+            _launchQueryValidatorMock.Object,
+            _launchDetailQueryValidatorMock.Object);
 
         // Act
         var result = await spaceXLaunchService.GetPastLaunchesAsync(query);

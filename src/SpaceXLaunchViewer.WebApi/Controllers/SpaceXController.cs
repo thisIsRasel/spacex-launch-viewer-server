@@ -20,6 +20,18 @@ public sealed class SpaceXController : ControllerBase
         _spaceXApiClient = spaceXApiClient;
     }
 
+    [HttpGet("Launches/{flightNumber}")]
+    public async Task<IActionResult> GetLaunchByFlightNumberAsync(int flightNumber)
+    {
+        _logger.LogInformation("Getting SpaceX launch detail for flight {FlightNumber}", flightNumber);
+
+        var query = new LaunchDetailQuery(flightNumber);
+
+        var result = await _spaceXApiClient.GetLaunchByFlightNumberAsync(query);
+
+        return result.ToOk();
+    }
+
     [HttpGet("Launches/Past")]
     public async Task<IActionResult> GetPastLaunchesAsync(
         [FromQuery] int pageNumber)
