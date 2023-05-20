@@ -29,7 +29,7 @@ Start the API:
 dotnet run --project src\SpaceXLaunchViewer.WebApi\SpaceXLaunchViewer.WebApi.csproj
 ```
 
-Open your web browser and navigate to http://localhost:44320/swagger/index.html or https://localhost:44321/swagger/index.html to ensure the API is running properly.
+Open your web browser and navigate to http://localhost:44320/swagger/index.html to ensure the API is running properly.
 
 ## Installation in Docker
 To run the API locally using Docker, follow these steps:
