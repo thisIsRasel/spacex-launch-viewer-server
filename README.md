@@ -26,7 +26,7 @@ dotnet restore
 
 Start the API:
 ```
-dotnet run
+dotnet run --project src\SpaceXLaunchViewer.WebApi\SpaceXLaunchViewer.WebApi.csproj
 ```
 
 Open your web browser and navigate to http://localhost:44320/swagger/index.html or https://localhost:44321/swagger/index.html to ensure the API is running properly.
